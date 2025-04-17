@@ -1,0 +1,162 @@
+{
+  "version": "41.0.0",
+  "artifacts": {
+    "ImageGeneratorStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ImageGeneratorStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ImageGeneratorStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://176385768664/us-west-2",
+      "properties": {
+        "templateFile": "ImageGeneratorStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::176385768664:role/cdk-hnb659fds-deploy-role-176385768664-us-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::176385768664:role/cdk-hnb659fds-cfn-exec-role-176385768664-us-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-176385768664-us-west-2/8340847af7da3ad019b44e9f1d9384db345559185fc22b940cf3f433b5330683.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ImageGeneratorStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::176385768664:role/cdk-hnb659fds-lookup-role-176385768664-us-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ImageGeneratorStack.assets"
+      ],
+      "metadata": {
+        "/ImageGeneratorStack/ImageBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageBucket97210811"
+          }
+        ],
+        "/ImageGeneratorStack/ImageBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageBucketPolicy9E7B0384"
+          }
+        ],
+        "/ImageGeneratorStack/ImageBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageBucketAutoDeleteObjectsCustomResource99A1E17B"
+          }
+        ],
+        "/ImageGeneratorStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/ImageGeneratorStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/ImageGeneratorStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/ImageGeneratorStack/FontConfigLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FontConfigLayer55568C60"
+          }
+        ],
+        "/ImageGeneratorStack/ImageGenerator/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageGeneratorServiceRole22125C8D"
+          }
+        ],
+        "/ImageGeneratorStack/ImageGenerator/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageGeneratorServiceRoleDefaultPolicy2BE74D1C"
+          }
+        ],
+        "/ImageGeneratorStack/ImageGenerator/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ImageGenerator95E67AC0"
+          }
+        ],
+        "/ImageGeneratorStack/ContainerRuntime": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ContainerRuntime"
+          }
+        ],
+        "/ImageGeneratorStack/BucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BucketName"
+          }
+        ],
+        "/ImageGeneratorStack/FunctionName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FunctionName"
+          }
+        ],
+        "/ImageGeneratorStack/FontLayerArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FontLayerArn"
+          }
+        ],
+        "/ImageGeneratorStack/PillowLayerArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PillowLayerArn"
+          }
+        ],
+        "/ImageGeneratorStack/Region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Region"
+          }
+        ],
+        "/ImageGeneratorStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ImageGeneratorStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ImageGeneratorStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ImageGeneratorStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  },
+  "minimumCliVersion": "2.1005.0"
+}
