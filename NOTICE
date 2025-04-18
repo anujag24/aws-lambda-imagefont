@@ -1,0 +1,32 @@
+AWS Lambda Image Generator
+Copyright 2024 Anuj Gupta
+
+This product includes software developed by Anuj Gupta.
+
+Third Party Components:
+
+1. Klayers (https://github.com/keithrozario/Klayers)
+   Copyright (c) Keith Rozario
+   Licensed under the Apache License, Version 2.0
+   Used for providing AWS Lambda Layers for Python packages
+
+2. Pillow (https://python-pillow.org/)
+   Copyright © 1995-2024 by Fredrik Lundh and Contributors
+   Licensed under the Historical Permission Notice and Disclaimer (HPND)
+   Used for image manipulation
+
+3. DejaVu Fonts
+   Copyright (c) 2003 by Bitstream, Inc.
+   Licensed under the DejaVu Fonts License
+   Used for text rendering in generated images
+
+4. AWS CDK
+   Copyright Amazon.com, Inc. or its affiliates
+   Licensed under the Apache License, Version 2.0
+   Used for infrastructure deployment
+
+For full license texts, please see the respective projects' repositories and documentation.
+
+This NOTICE file is required by the Apache License 2.0, under which this project is licensed.
+Any modifications to the above mentioned third-party components are noted in the respective 
+source files where the modifications occur.
