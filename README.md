@@ -26,40 +26,48 @@ The application consists of:
 ```bash
 git clone https://github.com/yourusername/aws-lambda-image-generator.git
 cd aws-lambda-image-generator
+```
 
 2. Install dependencies
 # Install CDK dependencies
-npm install
+```npm install
+```
 
 # Install Python dependencies
-python -m venv .venv
+```python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
 3. Build the font layer
 # Create layer directory
-mkdir -p layer/fonts/python
+```mkdir -p layer/fonts/python
+```
 
 # Copy font files
-cp fonts/*.ttf layer/fonts/python/
+```cp fonts/*.ttf layer/fonts/python/
+```
 
 # Create and activate virtual environment for layer
-python -m venv layer/fonts/venv
+```python -m venv layer/fonts/venv
 source layer/fonts/venv/bin/activate  # On Windows: layer\fonts\venv\Scripts\activate
+```
 
 # Install required packages for layer
-pip install -r layer/fonts/requirements.txt -t layer/fonts/python
+```pip install -r layer/fonts/requirements.txt -t layer/fonts/python
+```
 
 # Deactivate virtual environment
-deactivate
-
+```deactivate
+```
 
 4. Deploy the application
-cdk bootstrap   # If you haven't bootstrapped CDK before
+```cdk bootstrap   
 cdk deploy
+```
 
 
-Sample Usage
+# Sample Usage
 ```
 import boto3
 import json
