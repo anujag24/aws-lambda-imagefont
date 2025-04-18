@@ -64,6 +64,14 @@ source layer/fonts/venv/bin/activate  # On Windows: layer\fonts\venv\Scripts\act
 pip install -r layer/fonts/requirements.txt -t layer/fonts/python
 ```
 
+#### Build Docker image and export Fonts layer as ZIP
+```bash
+cd layer
+docker build -t lambda-layer-builder .
+docker run --rm -v $(pwd):/output lambda-font-layer cp /layer.zip /output/
+```
+A layer.zip file is generated in layer directory
+
 #### Deactivate virtual environment
 ```bash
 deactivate
