@@ -52,8 +52,8 @@ pip install -r requirements.txt -t layer/fonts/
 #### Build Docker image and export Fonts layer as ZIP
 ```bash
 cd layer
-docker build -t lambda-layer-builder .
-docker run --rm -v $(pwd):/output lambda-font-layer cp /layer.zip /output/
+docker build -t font-layer .
+docker run --rm -v $(pwd):/output font-layer cp /layer.zip /output/
 ```
 A layer.zip file is generated in layer directory
 
