@@ -65,7 +65,12 @@ deactivate
 ### 4. Deploy the application
 ```bash
 cd ../cdk
-cdk bootstrap
+cdk bootstrap aws://123456789012/us-east-1
+```
+https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html
+
+
+```bash
 npm install
 npm run build
 cdk deploy
