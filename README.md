@@ -15,6 +15,7 @@ The application consists of:
 ## Prerequisites
 
 - AWS Account and configured AWS CLI
+- Configured AWS CLI user with permissions to the required AWS services
 - Node.js 18+ and npm
 - Python 3.12
 - Docker
@@ -30,39 +31,47 @@ cd aws-lambda-image-generator
 
 2. Install dependencies
 # Install CDK dependencies
-```npm install
+```bash
+npm install
 ```
 
 # Install Python dependencies
-```python -m venv .venv
+```bash
+python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 3. Build the font layer
 # Create layer directory
-```mkdir -p layer/fonts/python
+```bash
+mkdir -p layer/fonts/python
 ```
 
 # Copy font files
-```cp fonts/*.ttf layer/fonts/python/
+```bash
+cp fonts/*.ttf layer/fonts/python/
 ```
 
 # Create and activate virtual environment for layer
-```python -m venv layer/fonts/venv
+```bash
+python -m venv layer/fonts/venv
 source layer/fonts/venv/bin/activate  # On Windows: layer\fonts\venv\Scripts\activate
 ```
 
 # Install required packages for layer
-```pip install -r layer/fonts/requirements.txt -t layer/fonts/python
+```bash
+pip install -r layer/fonts/requirements.txt -t layer/fonts/python
 ```
 
 # Deactivate virtual environment
-```deactivate
+```bash
+deactivate
 ```
 
 4. Deploy the application
-```cdk bootstrap   
+```bash
+cdk bootstrap   
 cdk deploy
 ```
 
