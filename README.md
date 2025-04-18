@@ -64,7 +64,7 @@ deactivate
 
 ### 4. Deploy the application
 ```bash
-cd cdk
+cd ../cdk
 cdk bootstrap
 npm install
 npm run build
