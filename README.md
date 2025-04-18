@@ -107,6 +107,9 @@ response = lambda_client.invoke(
 )
 ```
 
+#### Output
+ ![Output](/images/sample.png)
+
 ## Monitoring and Security
 - CloudWatch Logs are automatically created
 - Resources use least-privilege IAM roles
