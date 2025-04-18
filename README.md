@@ -31,32 +31,22 @@ cd aws-lambda-imagefont
 
 ### 2. Install dependencies
 
+#### Create and activate virtual environment for layer
 ```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+python -m venv layer/venv
+source layer/venv/bin/activate  # On Windows: layer\venv\Scripts\activate
 ```
 
 ### 3. Build the font layer
+
 #### Create layer directory
 ```bash
-mkdir -p layer/fonts/python
-```
-
-#### Copy font files
-```bash
-cp fonts/*.ttf layer/fonts/python/
-```
-
-#### Create and activate virtual environment for layer
-```bash
-python -m venv layer/fonts/venv
-source layer/fonts/venv/bin/activate  # On Windows: layer\fonts\venv\Scripts\activate
+mkdir -p layer/fonts/
 ```
 
 #### Install required packages for layer
 ```bash
-pip install -r layer/fonts/requirements.txt -t layer/fonts/python
+pip install -r requirements.txt -t layer/fonts/
 ```
 
 #### Build Docker image and export Fonts layer as ZIP
