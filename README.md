@@ -20,6 +20,7 @@ The application consists of:
 - Python 3.12
 - Docker
 - AWS CDK CLI (`npm install -g aws-cdk`)
+- [Bootstrap AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html)
 
 ## Instructions
 
@@ -67,12 +68,13 @@ deactivate
 cd ../cdk
 cdk bootstrap aws://123456789012/us-east-1
 ```
-https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping-env.html
-
 
 ```bash
 npm install
 npm run build
+```
+
+```bash
 cdk deploy
 ```
 
