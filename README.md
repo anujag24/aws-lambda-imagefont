@@ -25,7 +25,7 @@ The application consists of:
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/aws-lambda-image-generator.git
+git clone [https://github.com/anujag24/aws-lambda-imagefont.git](https://github.com/anujag24/aws-lambda-imagefont.git)
 cd aws-lambda-image-generator
 ```
 
