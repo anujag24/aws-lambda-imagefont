@@ -1,4 +1,4 @@
-# AWS Lambda Image Generator
+# AWS Lambda Custom Font Image Generator 
 
 A serverless application that generates images with custom text using AWS Lambda, deployed with AWS CDK. The application uses [DejaVu Sans](https://dejavu-fonts.github.io/) font and the Pillow library for image manipulation.
 
