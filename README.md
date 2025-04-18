@@ -21,62 +21,62 @@ The application consists of:
 - Docker
 - AWS CDK CLI (`npm install -g aws-cdk`)
 
-## Quick Start
+## Instructions
 
-1. Clone the repository:
+### 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/aws-lambda-image-generator.git
 cd aws-lambda-image-generator
 ```
 
-2. Install dependencies
-# Install CDK dependencies
+### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
-# Install Python dependencies
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Build the font layer
-# Create layer directory
+### 3. Build the font layer
+#### Create layer directory
 ```bash
 mkdir -p layer/fonts/python
 ```
 
-# Copy font files
+#### Copy font files
 ```bash
 cp fonts/*.ttf layer/fonts/python/
 ```
 
-# Create and activate virtual environment for layer
+#### Create and activate virtual environment for layer
 ```bash
 python -m venv layer/fonts/venv
 source layer/fonts/venv/bin/activate  # On Windows: layer\fonts\venv\Scripts\activate
 ```
 
-# Install required packages for layer
+#### Install required packages for layer
 ```bash
 pip install -r layer/fonts/requirements.txt -t layer/fonts/python
 ```
 
-# Deactivate virtual environment
+#### Deactivate virtual environment
 ```bash
 deactivate
 ```
 
-4. Deploy the application
+### 4. Deploy the application
 ```bash
 cdk bootstrap   
 cdk deploy
 ```
 
 
-# Sample Usage
+## Sample Usage
 ```
 import boto3
 import json
@@ -92,17 +92,17 @@ response = lambda_client.invoke(
 )
 ```
 
-# Monitoring and Security
+## Monitoring and Security
 - CloudWatch Logs are automatically created
 - Resources use least-privilege IAM roles
 - S3 bucket is encrypted with SSE-S3
 - CloudWatch metrics and alarms available for monitoring
 
 
-# Acknowledgments & Dependencies
+## Acknowledgments & Dependencies
 
 This project uses:
 
-[Klayers](https://github.com/keithrozario/Klayers) - AWS Lambda Layers for Python packages (Apache License 2.0)
+[Klayers](https://github.com/keithrozario/Klayers) - AWS Lambda Layers for Pillow Python packages (Apache License 2.0)
 Used for providing the Pillow library layer in AWS Lambda
-Layer ARN: [specific ARN you're using]
+Layer ARN: [arn:aws:lambda:us-west-2:770693421928:layer:Klayers-p312-Pillow:5, arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p312-Pillow:5]
