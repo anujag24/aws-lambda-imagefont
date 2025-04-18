@@ -79,7 +79,10 @@ deactivate
 
 ### 4. Deploy the application
 ```bash
-cdk bootstrap   
+cd cdk
+cdk bootstrap
+npm install
+npm run build
 cdk deploy
 ```
 
