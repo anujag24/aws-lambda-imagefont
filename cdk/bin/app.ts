@@ -27,6 +27,5 @@ new ImageGeneratorStack(app, 'ImageGeneratorStack', {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: deploymentRegion,
   },
-  pillowLayerArn: pillowLayerArn, // Pass the Pillow layer ARN to the stack
+  pillowLayerArn: pillowLayerArn,
 });
-
