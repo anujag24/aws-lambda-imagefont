@@ -26,7 +26,7 @@ The application consists of:
 ### 1. Clone the repository:
 ```bash
 git clone https://github.com/anujag24/aws-lambda-imagefont.git
-cd aws-lambda-image-generator
+cd aws-lambda-imagefont
 ```
 
 ### 2. Install dependencies
