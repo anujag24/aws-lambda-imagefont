@@ -1,25 +1,52 @@
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as path from 'path';
 
+// Define interface for stack props that extends cdk.StackProps
+interface ImageGeneratorStackProps extends cdk.StackProps {
+  pillowLayerArn: string;
+}
+
 export class ImageGeneratorStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: ImageGeneratorStackProps) {
     super(scope, id, props);
 
     // Create S3 bucket for storing generated images
     const bucket = new s3.Bucket(this, 'ImageBucket', {
-      removalPolicy: cdk.RemovalPolicy.DESTROY, // For development - change for production
-      autoDeleteObjects: true, // For development - change for production
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
       versioned: true,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
+
+    // Get container executable (docker or finch)
+    const containerExecutable = process.env.DOCKER || 'docker';
 
     // Create custom font Lambda layer
     const fontLayer = new lambda.LayerVersion(this, 'FontConfigLayer', {
       code: lambda.Code.fromAsset(path.join(__dirname, '../../layer'), {
         bundling: {
+          local: {
+            tryBundle(outputDir: string) {
+              try {
+                const commands = [
+                  `${containerExecutable} build -t font-layer ${path.join(__dirname, '../../layer')}`,
+                  `${containerExecutable} run --rm -v ${outputDir}:/asset-output font-layer cp /layer.zip /asset-output/`
+                ];
+                
+                for (const command of commands) {
+                  require('child_process').execSync(command, { stdio: 'inherit' });
+                }
+                return true;
+              } catch (error) {
+                console.error('Failed to bundle locally:', error);
+                return false;
+              }
+            }
+          },
           image: cdk.DockerImage.fromRegistry('public.ecr.aws/amazonlinux/amazonlinux:2023'),
           command: [
             'bash', '-c', `
@@ -45,19 +72,19 @@ export class ImageGeneratorStack extends cdk.Stack {
       compatibleRuntimes: [lambda.Runtime.PYTHON_3_12],
     });
 
-    // Reference existing Pillow layer
+    // Reference existing Pillow layer using the ARN from props
     const pillowLayer = lambda.LayerVersion.fromLayerVersionArn(
       this,
       'PillowLayer',
-      'arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p312-Pillow:5'
+      props.pillowLayerArn
     );
 
     // Create Lambda function
     const lambdaFunction = new lambda.Function(this, 'ImageGenerator', {
       runtime: lambda.Runtime.PYTHON_3_12,
       handler: 'lambda_function.lambda_handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, '../../src')), // No need to bundle Pillow anymore
-      layers: [fontLayer, pillowLayer], // Add both layers
+      code: lambda.Code.fromAsset(path.join(__dirname, '../../src')),
+      layers: [fontLayer, pillowLayer],
       environment: {
         S3_BUCKET_NAME: bucket.bucketName,
       },
@@ -68,7 +95,12 @@ export class ImageGeneratorStack extends cdk.Stack {
     // Grant S3 permissions to Lambda
     bucket.grantWrite(lambdaFunction);
 
-    // Output the bucket name, function name, and layer ARNs
+    // Outputs
+    new cdk.CfnOutput(this, 'ContainerRuntime', {
+      value: containerExecutable,
+      description: 'Container runtime used for bundling'
+    });
+
     new cdk.CfnOutput(this, 'BucketName', {
       value: bucket.bucketName,
       description: 'Name of the S3 bucket for storing generated images',
@@ -87,6 +119,11 @@ export class ImageGeneratorStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'PillowLayerArn', {
       value: pillowLayer.layerVersionArn,
       description: 'ARN of the Pillow layer',
+    });
+
+    new cdk.CfnOutput(this, 'Region', {
+      value: this.region,
+      description: 'Deployment region'
     });
   }
 }
